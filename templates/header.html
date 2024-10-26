@@ -1,0 +1,192 @@
+{% load static %}
+{% load i18n %}
+    
+{% comment %} <div class="header">
+
+  <div class="row" style="padding:20px 20px">
+    <div class="col">
+      <a class="logo"><img src="{% static "images/logo.png" %}" class="img-fluid" alt="logo" width="200px"></a>
+    </div>
+    
+    <div class="col-6">
+      <span class="text-align-bottom">Bienvenue sur notre site de cuisine, où chaque recette est une aventure gustative ! Explorez nos différentes catégories et laissez-vous inspirer pour créer des plats délicieux et mémorables.</span>
+    </div>
+    <div class="col">
+      <nav class="menu">
+        {% if user.is_authenticated %}
+        <span>{% translate "Bienvenue" %} {{ user.username }}  {% translate "sur ma cuisine Antillaise." %}</span><br>
+        <a href="{% url 'accounts:profile' %}">{% translate "Mon compte" %}</a> |  
+        <a href="{% url 'accounts:logout' %}">{% translate "Logout" %}</a> 
+        
+        {% else %}
+        <span>{% translate "Bienvenue" %} {% translate "sur ma cuisine Antillaise." %}</span><br>
+        <a href="{% url 'accounts:login' %}">{% translate "Login" %}</a>  | 
+        <a href="{% url 'accounts:register' %}">{% translate "Register" %}</a>
+        {% endif %}
+    </nav>
+    </div>
+</div>
+</div> {% endcomment %}
+  
+<!-- Preloader start -->
+<div class="ct-preloader">
+  <div class="ct-preloader-inner">
+    <div class="ct-preloader-pan">
+      <div class="ct-preloader-pan-inner">
+        <div class="ct-preloader-pan-circle"></div>
+        <div class="ct-preloader-pan-handle"></div>
+      </div>
+      <div class="ct-preloader-pancake">
+        <div class="ct-preloader-pancake-inner"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Preloader End -->
+
+<!-- Aside (Mobile Navigation) -->
+<aside class="main-aside">
+  <a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static "images/logo.png" %}" alt="logo"> </a>
+
+  <div class="aside-scroll">
+    <ul>
+      <li class="menu-item menu-item-has-children">
+        <a href="{% url 'home' %}">Home</a>
+      </li>
+      <li class="menu-item menu-item-has-children">
+        <a href="{% url 'recettes:category' %}">Recipes</a>
+      </li>
+      <li class="menu-item menu-item-has-children">
+        <a href="{% url 'blog:blog_list' %}">The blog</a>
+      </li>
+      <li class="menu-item">
+        <a href="shop.html">Shop</a>
+      </li>
+      <li class="menu-item">
+        <a href="{% url 'contact:contact' %}">Contact Us</a>
+      </li>
+    </ul>
+
+  </div>
+
+</aside>
+<div class="aside-overlay aside-trigger"></div>
+
+<!-- Header Start -->
+<header class="main-header header-4">
+  <!-- Top Header Start -->
+  <div class="top-header">
+    <div class="container">
+      <div class="top-header-inner">
+
+        <ul class="social-media">
+          <li> <a href="#"> <i class="fab fa-facebook-f"></i> </a> </li>
+          <li> <a href="#"> <i class="fab fa-pinterest-p"></i> </a> </li>
+          <li> <a href="#"> <i class="fab fa-patreon"></i> </a> </li>
+          <li> <a href="#"> <i class="fab fa-twitter"></i> </a> </li>
+        </ul>
+
+        <ul class="top-header-nav">
+          {% if user.is_authenticated %}
+          <span>{% translate "Bienvenue" %} {{ user.username }}  {% translate "sur ma cuisine Antillaise" %}</span><br>
+          <li><a href="{% url 'accounts:profile' %}">{% translate "Mon compte" %}</a></li>  
+          <li><a href="{% url 'accounts:logout' %}">{% translate "Logout" %}</a></li> 
+          {% else %}
+          <span>{% translate "Bienvenue" %} {% translate "sur ma cuisine Antillaise" %}</span><br>
+          <li> <a href="{% url 'accounts:login' %}">Login</a> </li>
+          <li> <a href="{% url 'accounts:register' %}">Register</a> </li>
+          {% endif %}
+          {% if user.profile.photo %}
+          <li><a href="{% url 'accounts:profile' %}"><img src="{{ user.profile.photo.url }}" width="30px" height="30px"></a></li>
+          {% else %}
+          <li><a href="{% url 'accounts:register' %}"><img src="/media/accounts/profilepic.jpg" width="30px" height="30px"></a></li>
+          {% endif %}
+        </ul>
+
+      </div>
+    </div>
+  </div>
+  <!-- Top Header End -->
+
+  <nav class="navbar">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static "images/logo.png" %}" alt="logo"> </a>
+      <!-- Menu -->
+      <ul class="navbar-nav">
+        <li class="menu-item menu-item-has-children">
+          <a href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="menu-item menu-item-has-children">
+          <a href="{% url 'recettes:category' %}">Recepes</a>
+        </li>
+        <li class="menu-item menu-item-has-children">
+          <a href="{% url 'blog:blog_list' %}">The blog</a>
+        </li>
+        <li class="menu-item">
+          <a href="#">The shop</a>
+        </li>
+        <li class="menu-item">
+          <a href="{% url 'contact:contact' %}">Contact Us</a>
+        </li>
+      </ul>
+
+      <div class="header-controls">
+        <ul class="header-controls-inner">
+          <li class="cart-dropdown-wrapper cart-trigger">
+            <i class="flaticon-shopping-basket"></i>
+            <ul class="cart-dropdown">
+              <li class="cart-item">
+                <img src="https://via.placeholder.com/400" alt="product">
+                <div class="cart-item-body">
+                  <a href="#">Red Tea Pot With Black Handles</a>
+                  <span class="custom-secondary">2x 18.00$</span>
+                </div>
+              </li>
+              <li class="cart-item">
+                <img src="https://via.placeholder.com/400" alt="product">
+                <div class="cart-item-body">
+                  <a href="#">Oak Wood Cutting Board</a>
+                  <span class="custom-secondary">1x 24.25$</span>
+                </div>
+              </li>
+              <li class="cart-subtotal">
+                <p> <strong>Subtotal: </strong> 54.25$</p>
+              </li>
+              <li class="cart-buttons">
+                <a href="checkout.html" class="btn-custom primary btn-sm shadow-none">Checkout</a>
+                <a href="cart.html" class="btn-custom secondary btn-sm shadow-none">View Cart</a>
+              </li>
+            </ul>
+          </li>
+          <li class="search-dropdown-wrapper search-trigger">
+            <i class="flaticon-magnifying-glass"></i>
+          </li>
+        </ul>
+        <!-- Toggler -->
+        <div class="aside-toggler aside-trigger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Search Form Start-->
+  <div class="search-form-wrapper">
+    <div class="search-trigger close-btn">
+      <span></span>
+      <span></span>
+    </div>
+    <form class="search-form" method="post">
+      <input type="text" placeholder="Search..." value="">
+      <button type="submit" class="search-btn">
+        <i class="flaticon-magnifying-glass"></i>
+      </button>
+    </form>
+  </div>
+  <!-- Search Form End-->
+
+</header>

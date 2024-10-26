@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}{% translate "Le blog de Ma cuisine Antillaise" %}{% endblock %}
+
+{% comment %} {% block css_block %}
+<style>
+
+    #blog {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 5rem;
+    }
+      
+    #blog article {
+        width: 50%;
+        margin-top: 2rem;
+    }
+    
+    @media (max_width: 1024px) {
+        #blog article {
+          width: 85%;
+        }
+    }
+         
+    .post-title {
+        display: flex;
+        align-items: center;
+    }
+      
+    .post-title a {
+        color: steelblue;
+        text-decoration: none;
+        margin-left: .5rem;
+    }
+
+    .post-title a:last-child {
+        color: red;
+    }
+      
+    .post-title > div {
+        margin-left:auto;
+    }
+      
+    .post-author {
+        margin: .5rem 0;
+    }
+      
+    .post-excerpt {
+        margin-bottom: 1rem;
+    }
+
+    .btn {
+
+    }
+
+    .btn-submit {
+        blackround-color: steelblue;
+    }
+
+    .btn-delete {
+        blackround-color: indienred;
+    }
+
+</style>
+{% endblock %} {% endcomment %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+    {% for blog in blogs %}
+<h2>{{ blog.blog_title }}</h2>
+<h6><i>{{ blog.publish_date }}</i></h6>
+
+<div class="row">
+    <div class="col-sm-4">
+        <img src="/media/{{blog.blog_image}}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title}}">
+
+    </div>
+
+    <div class="col-sm-8">
+        <p>{{ blog.blog_content|range_filter|safe|linebreaks }}
+            <a href="{% url 'blog:blog_details' slug=blog.slug %}">Read More</a>
+        </p>
+        <h6>Posted By: <a href="#">{{ blog.author }}</a></h6>
+        <h6>{{ blog.liked_blog.count }} Likes | {{ blog.blog_blogcomment.count }} Comments</h6>
+
+    </div>
+</div>
+{% endfor %}
+</div>
+</section>
+{% comment %} <article>
+    <div class="post-title">
+                    <h2>{{ blog.blog_title }}</h2>
+                    <h2>{{ blog.publish_date }}</h2>
+
+                    {% if request.user.is_authenticated %}
+                    <div>   
+                            <a href="{% url 'blog:edit_blog' slug=blog.slug %}">Editer</a>
+                            <a href="{% url 'blog:delete_blog' slug=blog.slug %}">Supprimer</a>   
+                    </div>
+                    {% endif %}
+    </div>
+                    <h5 class="post_author">Publié par <i>{{ blog.author_or_default }}</i> le {{ blog.publish_date|date:'j F Y' }}</h5>
+                    <p class="post_excerpt">{{ blog.blog_content|safe|truncatewords:50 }}</p>
+
+                    <form action="{% url 'blog:detail_blog' slug=blog.slug %}">
+                        <button class="btn btn-submit">Lire l'article</button>
+                    </form>
+</article> {% endcomment %}
+
+
+{% endblock %}

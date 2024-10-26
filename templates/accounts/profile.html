@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% translate "Your Profile" %}{% endblock %}
+
+{% block body_block %}
+
+<div class="row">
+  <div class="col-sm-6">
+    <img src="{{ user.profile.photo.url }}">
+    
+          <div class="td">  
+          
+          
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div id="">{{ user.profile.first_name }} {{ user.profile.last_name }}</div>
+    <div class="m-btn"><a class="" href="{% url 'accounts:edite_profile' user.profile.id %}"><i class="fa fa-user"> </i> <span>{% translate "Editer mon profile" %}</span></a></div>
+    <div class="m-btn"><a href="{% url 'accounts:change_photo' %}"><i class="fa fa-camera"></i> <span>{% translate "Change Profile photo" %}</span></a></div>
+    <div class="m-btn"><a class="" href="{% url 'accounts:confidentialite' %}"><i class="fa fa-lock"> </i> <span>{% translate "Confidentialité" %}</span></a></div>
+  </div>
+     
+<div class="messages container mt-2">
+  {% if messages %}
+    {% for message in messages %}
+      <div {% if message.tags %} class="alert alert-{{ message.tags }} {% endif %}" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-level="close">
+            <span aria-hidden="true"> &times; </span>
+          </button>
+      </div>
+      {% endfor %}
+
+  {% endif %}
+
+</div><br><br>
+<div class="row">
+  <div class="col-sm-6">
+        <div class="section-title-wrap section-header">
+          <h3 class="title">{% translate "Mes Articles" %} ({{ user.post_author.count }}) | <a href="{% url 'blog:create_blog' %}"><h7>{% translate "Proposer un article" %}</h7></a></h3>
+          {% for blog in user.post_author.all %}
+          <table>
+            <caption>
+              <a href="{% url 'blog:edit_blog' slug=blog.slug %}">Editer</a> | 
+              <a href="{% url 'blog:delete_blog' slug=blog.slug %}">Supprimer</a>
+              {% comment %} <form action="{% url 'blog:edit_blog' slug=blog.slug %}"><button class="btn btn-submit">Editer</button>
+              </form><form action="{% url 'blog:delete_blog' slug=blog.slug %}"><button class="btn btn-submit">Supprimer</button></form> {% endcomment %}
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Status</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Crée le</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{ blog.published }}</th>
+                <td>{{ blog.blog_title }}</td>
+                <td>{{ blog.publish_date }}</td>
+              </tr>
+            </tbody>
+          </table>
+          {% empty %}
+          <h5>{% translate "Vous n'avez pas encore creer d'Article" %}</h5>
+          {% endfor %}
+         
+        </div>
+        
+      </div>
+
+        <div class="col-sm-6">
+          <div class="section-title-wrap section-header">
+            <h3 class="title">{% translate "Mes Recettes" %} ({{ user.post_author.count }}) | <a href="{% url 'blog:create_blog' %}"><h7>{% translate "Proposer une recette" %}</h7></a></h3>
+          {% for blog in user.post_author.all %}
+          <table>
+            <caption>
+              <a href="{% url 'blog:edit_blog' slug=blog.slug %}">Editer</a> | 
+              <a href="{% url 'blog:delete_blog' slug=blog.slug %}">Supprimer</a>
+              {% comment %} <form action="{% url 'blog:edit_blog' slug=blog.slug %}"><button class="btn btn-submit">Editer</button>
+              </form><form action="{% url 'blog:delete_blog' slug=blog.slug %}"><button class="btn btn-submit">Supprimer</button></form> {% endcomment %}
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Status</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Crée le</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{ blog.published }}</th>
+                <td>{{ blog.blog_title }}</td>
+                <td>{{ blog.publish_date }}</td>
+              </tr>
+            </tbody>
+          </table>
+          {% empty %}
+          <h5>{% translate "Vous n'avez pas encore creer de recette" %}</h5>
+          {% endfor %}
+
+        </div>
+      </div>
+      </div>
+    </div>
+    </div>
+
+{% endblock %}    

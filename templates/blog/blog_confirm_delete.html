@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_utils %}
+{% load crispy_forms_field %}
+
+{% block title %}{% translate "Supprimer un article" %}{% endblock %}
+
+{% block content %}
+        <form method="Post">
+            {% csrf_token %}
+            <p>Etes-vous sur de vouloir supprimer "{{ blog.blog_title }}"?</p>
+            
+        <button type="submit" class="btn btn-success btn_sm">Oui, Supprimer</button>
+        </form>
+{% endblock %}

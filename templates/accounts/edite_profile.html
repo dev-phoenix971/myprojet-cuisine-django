@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_utils %}
+{% load crispy_forms_field %}
+
+{% block title %}{% translate "Edite Profile" %}{% endblock %}
+{{ form.media }}
+{% block css_block %}
+<style>
+
+    .profile{
+        width: 750px;
+        border: 1px solid #ccc;
+        padding: 40px;
+    }
+
+</style>
+{% endblock %}
+
+{% block body_block %}
+<center>
+    <div class="profile">
+        <h2>Your Profile</h2>
+        <form method="Post" enctype="multipart/form-data">
+            {{ form|crispy }}
+            {% csrf_token %}
+            
+        <button type="submit" class="btn btn-primary">Editer</button>
+        </form>
+    </div>
+
+
+</center>
+
+{% endblock %}

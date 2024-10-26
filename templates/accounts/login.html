@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} {{ title }} {% endblock %}
+
+
+{% block content %}
+{% comment %} <center>
+<div class="login">
+<h1>Login</h1>
+<form method="post">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <button type="submit" style="width:100%" class="btn btn-info btn-sm">Login</button>
+
+</form>
+
+</div>
+<p><a href="{% url 'accounts:password_reset_request' %}">Lost password?</a></p>
+<div class="sign_up">
+    <p>Doesn't have an Account? <a href="{% url 'accounts:register' %}">Create Account</a></p>
+    
+    
+</div>
+
+</center> {% endcomment %}
+<section class="section auth-section">
+    <div class="container">
+      <form class="auth-form light-bg" method="post" style="background-image: url('https://via.placeholder.com/600x500')">
+        <h1>Login</h1>
+        {{ form|crispy }}
+        {% csrf_token %}
+        <div class="auth-controls form-group">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="rememberMe">
+            <label class="custom-control-label fw-400" for="remember_me">Remember Me</label>
+          </div>
+          <a href="{% url 'accounts:password_reset_request' %}" class="btn-link fw-400">Forgot Password?</a>
+        </div>
+        <div class="form-group">
+          <button type="submit" style="width:100%" class="btn-custom primary btn-block">Login</button>
+        </div>
+        <p class="form-group text-center">Don't have an account? <a href="{% url 'accounts:register' %}" class="btn-link">Create One</a> </p>
+      </form>
+    </div>
+  </section>
+
+
+{% endblock %}

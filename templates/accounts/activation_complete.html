@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Activation Complete{% endblock %}
+
+{% block body_block %}
+<h3>Activation Complete</h3>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}! You have Successfully Activated the Account and Logged in!</p>
+    {% endif %}
+{% endblock %}

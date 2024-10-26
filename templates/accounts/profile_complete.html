@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    <title>{% translate "Your Profilennnnn" %}</title>
+{% endblock %}
+
+{% block content %}
+
+<div id="profile-upper">
+  <div id="profile-banner-image" style="background-image: url('{% static 'img/background_profil4.jpg' %}')">
+    <div id="profile-d">
+      <div id="profile-pic">
+        <img src="{{ user.profile.photo.url }}">
+      </div>
+
+      <div id="u-name">{{ user.profile.first_name }} {{ user.profile.last_name }} ({{ user.username }})</div>
+      <div class="tb" id="m-btns">
+          <div class="m-btn"><a class="" href="{% url 'accounts:edite_profile' user.profile.id %}"><i class="fa fa-user"> </i><span>{% translate "Editer mon profile" %}</span></a></div>
+          <div class="td">  
+          <div class="m-btn"><a class="" href="{% url 'accounts:password_change' %}"><i class="fa fa-lock"> </i><span>{% translate "Confidentialité" %}</span></a></div>
+      </div>
+      </div>
+      <div id="edit-profile"><i class="fa fa-camera"></i></div>
+    </div>
+    <div id="black-grd"></div>
+  </div>
+</div>
+
+<div class="messages container mt-2">
+  {% if messages %}
+    {% for message in messages %}
+      <div {% if message.tags %} class="alert alert-{{ message.tags }} {% endif %}" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-level="close">
+            <span aria-hidden="true"> &times; </span>
+          </button>
+      </div>
+      {% endfor %}
+
+  {% endif %}
+
+</div>
+<div class="col-sm-5"><a href="{% url 'accounts:change_photo' %}" class="btn btn-info btn-sm">{% translate "Change Profile photo" %}</a></div>
+
+  
+</div>
+</div>
+
+
+{% endblock %}    

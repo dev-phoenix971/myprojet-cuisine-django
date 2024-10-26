@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+        <link rel="stylesheet" type="text/css" href="{% static 'plugins/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'plugins/animate.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'plugins/magnific-popup.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'plugins/slick.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'plugins/slick-theme.css' %}">     
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'flaticon/flaticon.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/all.min.css' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static "favicon.ico" %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+        <title>
+          {% block title %}
+            Ma Cuisine Antillaise
+          {% endblock %}
+
+        </title>
+
+        {% block css_block %}
+        {% endblock %}
+
+    </head>
+    <body>
+        {% include "header.html" %}
+        {% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-nav">
+                
+                <a class="nav-item nav-link active" href="{% url 'home' %}">Home</a>
+                <a class="nav-item nav-link" href="{% url 'recettes:category' %}">Les Recettes</a>
+                <a class="nav-item nav-link" href="{% url 'blog:blog_list' %}">Le blog</a>
+                <a class="nav-item nav-link" href="#">La boutique</a>
+                <a class="nav-item nav-link" href="{% url 'contact' %}">Contactez-nous</a>
+                {% if user.profile.photo %}
+                <a class="nav-item nav-link active" href="{% url 'accounts:profile' %}"><img src="{{ user.profile.photo.url }}" width="30px" height="30px"></a>
+                {% else %}
+                <a class="nav-item nav-link active" href=""><img src="/media/accounts/profilepic.jpg" width="30px" height="30px"></a>
+                {% endif %}
+            </div>
+        </nav>  {% endcomment %}
+
+  {% block content %}
+        <div class="messages container mt-2">
+            {% if messages %}
+              {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }} {% endif %}" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-level="close">
+                      <span aria-hidden="true"> &times; </span>
+                    </button>
+                </div>
+                {% endfor %}
+        
+            {% endif %}
+        
+          </div>
+        {% endblock %}
+</div>
+{% comment %} <footer class="ct-footer footer-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-10 footer-widget">
+          <div class="footer-logo"> <img src="{% static "images/logo.png" %}" alt="Ma Cuisine Antillaise" width="200px"> </div>
+        </div>   
+        <div class="col-lg-4 col-md-4 col-sm-6 footer-widget">
+              <p>{% translate "Je vous propose des recettes Antillaises en vidéo. Sur le blog les abonnés ont la possibilité de proposer leur propre vidéo" %}</p>
+              <ul class="social-media">
+                <li> <a href="javascript:void(0)"> <i class="fab fa-facebook-f"></i> </a> </li>
+                <li> <a href="javascript:void(0)"> <i class="fab fa-twitter"></i> </a> </li>
+                <li> <a href="javascript:void(0)"> <i class="fab fa-pinterest-p"></i> </a> </li>
+                <li> <a href="javascript:void(0)"> <i class="fab fa-linkedin-in"></i> </a> </li>
+              </ul>
+        </div>
+            
+            <div class="offset-lg-1 offset-md-1 col-lg-3 col-md-3 col-sm-6 footer-widget">
+              <h5 class="widget-title">{% translate "Legal" %}</h5>
+              <ul>
+                <li> <a href="javascript:void(0)">{% translate "Privacy Policy" %}</a> </li>
+                <li> <a href="javascript:void(0)">{% translate "Refund Policy" %}</a> </li>
+                <li> <a href="javascript:void(0)">{% translate "Cookie Policy" %}</a> </li>
+                <li> <a href="javascript:void(0)">{% translate "Terms & Conditions" %}</a> </li>
+              </ul>
+  
+            </div>
+        </div>
+      </div>
+        <div class="footer-bottom">
+          <div class="container">
+            <p class="m-0">&copy; Copyright 2023 - <a href="javascript:void(0)">Ma Cuisine Antillaise</a> All Rights Reserved.</p>
+          </div>
+        </div>
+  </footer> {% endcomment %}
+  {% comment %} <footer class="bg-primary text-white text-center text-lg-start">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+          <h5 class="text-uppercase"> Ma Cuisine Antillaise</h5>
+  
+          <p>
+            {% translate "Je vous propose des recettes Antillaises en vidéo. Sur le blog les abonnés ont la possibilité de proposer leur propre article, et aussi proposer des recettes en videos" %}
+          </p>
+        </div>
+        <!--Grid column-->
+  
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5>Réseaux sociaux</h5>
+  
+          <ul class="list-unstyled mb-0">
+            <li> <a href="javascript:void(0)" class="text-white"> <i class="fab fa-facebook-f"></i> </a> </li>
+            <li> <a href="javascript:void(0)" class="text-white"> <i class="fab fa-twitter"></i> </a> </li>
+            <li> <a href="javascript:void(0)" class="text-white"> <i class="fab fa-pinterest-p"></i> </a> </li>
+            <li> <a href="javascript:void(0)" class="text-white"> <i class="fab fa-linkedin-in"></i> </a> </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+  
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="mb-0">{% translate "Informations Legal" %}</h5>
+  
+          <ul class="list-unstyled">
+            <li> <a href="javascript:void(0)" class="text-white">{% translate "Privacy Policy" %}</a> </li>
+            <li> <a href="javascript:void(0)" class="text-white">{% translate "Refund Policy" %}</a> </li>
+            <li> <a href="javascript:void(0)" class="text-white">{% translate "Cookie Policy" %}</a> </li>
+            <li> <a href="javascript:void(0)" class="text-white">{% translate "Terms & Conditions" %}</a> </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2024 Copyright:
+      <a class="text-white" href="https://macuisineantillaise.com/">Ma Cuisine Antillaise</a>
+    </div>
+    <!-- Copyright -->
+  </footer> {% endcomment %}
+
+  <footer class="ct-footer footer-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 footer-widget">
+          <div class="footer-logo"> <img src="{% static "images/logo.png" %}" alt="Ma Cuisine Antillaise"> </div>
+          <p>Je vous propose des recettes Antillaises en vidéo. Sur le blog les abonnés ont la possibilité de proposer leur propre article, et aussi proposer des recettes en videos</p>
+          <ul class="social-media">
+            <li> <a href="#"> <i class="fab fa-facebook-f"></i> </a> </li>
+            <li> <a href="#"> <i class="fab fa-twitter"></i> </a> </li>
+            <li> <a href="#"> <i class="fab fa-pinterest-p"></i> </a> </li>
+            <li> <a href="#"> <i class="fab fa-linkedin-in"></i> </a> </li>
+          </ul>
+        </div>
+        <div class="offset-lg-1 offset-md-1 col-lg-3 col-md-3 col-sm-6 footer-widget">
+          <h5 class="widget-title">Recipes</h5>
+          <ul>
+            <li> <a href="#">Breakfast</a> </li>
+            <li> <a href="#">Desserts</a> </li>
+            <li> <a href="#">Dinner</a> </li>
+            <li> <a href="#">Dairy</a> </li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-3 col-sm-6 footer-widget">
+          <h5 class="widget-title">Legal</h5>
+          <ul>
+            <li> <a href="#">Privacy Policy</a> </li>
+            <li> <a href="#">Refund Policy</a> </li>
+            <li> <a href="#">Cookie Policy</a> </li>
+            <li> <a href="#">Terms & Conditions</a> </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="m-0">&copy; Copyright 2024 - <a href="https://macuisineantillaise.com/">Ma Cuisine Antillaise</a> All Rights Reserved.</p>
+      </div>
+    </div>
+
+  </footer>
+        <script defer src="{% static 'js/plugins/jquery-3.4.1.min.js' %}"></script>
+        <script defer src="{% static 'js/plugins/popper.min.js' %}"></script>
+        <script defer src="{% static 'js/plugins/waypoint.js' %}"></script>
+        <script defer src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
+        <script defer src="{% static 'js/plugins/jquery.magnific-popup.min.js' %}"></script>
+        <script defer src="{% static 'js/plugins/jquery.slimScroll.min.js' %}"></script>
+        <script defer src="{% static 'js/plugins/imagesloaded.min.js' %}"></script>
+        <script defer src="{% static 'js/plugins/jquery.steps.min.js' %}"></script>
+        <script defer src="{% static 'js/plugins/jquery.countdown.min.js' %}"></script>
+        <script defer src="{% static 'js/plugins/isotope.pkgd.min.js' %}"></script>
+        <script defer src="{% static 'js/plugins/slick.min.js' %}"></script>
+        <script defer src="{% static 'js/main.js' %}"></script>
+    </body>
+</html>

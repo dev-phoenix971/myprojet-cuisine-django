@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% translate "Accueil" %}{% endblock %}
+    
+{% block content %}
+
+<div class="banner banner-carousel banner-img">
+  
+  <i class="slider-prev fas fa-arrow-left slick-arrow"></i>
+
+    <div class="banner-carousel-slider">
+      {% for x in recent_recettes %}
+      <div class="banner-item">
+        <div class="banner-inner dark-overlay" style="background-image: url('{{ x.image.url }}')" width="1280px" height="530px">
+          <div class="container">
+            <h1 class="title text-white">{{ x.name }}</h1>
+            <p class="subtitle text-white">{{ x.description | truncatewords:6 }}</p>
+            <a href="{% url 'recettes:recettesdetail' x.slug %}" class="btn-custom primary shadow-none">View Recipe <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  <i class="slider-next fas fa-arrow-right slick-arrow"></i> 
+</div>
+
+
+<section class="section">
+  <div class="container">
+  <div class="messages container mt-2">
+      {% if messages %}
+        {% for message in messages %}
+          <div {% if message.tags %} class="alert alert-{{ message.tags }} {% endif %}" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-level="close">
+                <span aria-hidden="true"> &times; </span>
+              </button>
+          </div>
+          {% endfor %}
+
+      {% endif %}
+
+  </div>
+  <div class="section-title-wrap section-header">
+    <h2 class="title">From My Blog</h2>
+    <p class="subtitle">
+      Want to see the what new recipes we are working on? Read our daily blog posts and stay up to date
+    </p>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+
+      <div class="row">
+
+        <!-- Post Start -->
+        <div class="col-lg-12">
+          <article class="post post-2">
+            <div class="post-thumbnail">
+              <a href="blog-single-v1.html"> <img src="https://via.placeholder.com/1280x700" alt="blog post"> </a>
+            </div>
+            <div class="post-body">
+              <div class="post-categories">
+                <a href="#">Breakfast</a>
+              </div>
+              <h5 class="post-title"> <a href="blog-single-v1.html">Puffy Pancakes Glazed With Caramel Topped With Fruits</a> </h5>
+              <p class="post-text">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                when an unknown printer took a galley of type and scrambled
+              </p>
+              <div class="post-meta">
+                <span> <i class="far fa-calendar"></i> January 22, 2020</span>
+                <span> <i class="far fa-user"></i> Posted by Jonathan Pick</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <!-- Post End -->
+
+        <!-- Post Start -->
+        <div class="col-lg-12">
+          <article class="post post-2">
+            <div class="post-thumbnail">
+              <a href="blog-single-v1.html"><img src="https://via.placeholder.com/1280x700" alt="blog post"></a>
+            </div>
+            <div class="post-body">
+              <div class="post-categories">
+                <a href="#">Lunch</a>
+              </div>
+              <h5 class="post-title"> <a href="blog-single-v1.html">Pasta With Pesto Sauce, Topped With Grated Cheese</a> </h5>
+              <p class="post-text">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                when an unknown printer took a galley of type and scrambled
+              </p>
+              <div class="post-meta">
+                <span><i class="far fa-calendar"></i> January 24, 2020</span>
+                <span><i class="far fa-user"></i> Posted by Jonathan Pick</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <!-- Post End -->
+
+
+      </div>
+
+    </div>
+    <div class="col-lg-4">
+      <div class="sidebar">
+
+        <div class="sidebar-widget">
+          <h5>Recent Recipes</h5>
+          {% for x in recent_recettes %}
+          <article class="media">
+            <a href="{% url 'recettes:recettesdetail' x.slug %}"><img src="{{ x.image.url }}" alt="post"></a>
+            <div class="media-body">
+              <h6> <a href="{% url 'recettes:recettesdetail' x.slug %}">{{ x.name }}</a> </h6>
+              <p>{{ x.last_udated }}</p>
+            </div>
+          </article>
+          {% endfor %}
+        
+        </div>
+        <div class="sidebar-widget">
+          <h5>Featured Recipes</h5>
+
+          <div class="recipe featured-recipe">
+            <div class="recipe-thumbnail">
+              <a href="recipe-details.html">
+                <img src="https://via.placeholder.com/1280x700" alt="blog post">
+              </a>
+            </div>
+            <div class="recipe-body">
+              <h6 class="recipe-title"> <a href="recipe-details.html">Sugary Pancakes Dressed With Cream and Raspberries</a> </h6>
+              <div class="recipe-meta">
+                <div class="recipe-difficulty">
+                  <div class="recipe-difficulty-inner">
+                    <span class="active"></span>
+                    <span class="active"></span>
+                    <span></span>
+                  </div>
+                  <span>Home Cook</span>
+                </div>
+                <div class="recipe-steps">
+                  <span><i class="fas fa-concierge-bell"></i> 24 Steps</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="recipe featured-recipe">
+            <div class="recipe-thumbnail">
+              <a href="recipe-details.html">
+                <img src="https://via.placeholder.com/1280x700" alt="blog post">
+              </a>
+            </div>
+            <div class="recipe-body">
+              <h6 class="recipe-title"> <a href="recipe-details.html">Fig and Raspberry Cake With Sugar Filling and Coating</a> </h6>
+              <div class="recipe-meta">
+                <div class="recipe-difficulty">
+                  <div class="recipe-difficulty-inner">
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <span>Amateur</span>
+                </div>
+                <div class="recipe-steps">
+                  <span><i class="fas fa-concierge-bell"></i> 13 Steps</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

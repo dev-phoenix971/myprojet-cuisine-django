@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block title %}
+    <title>Create Profile</title>
+{% endblock %}
+
+{% block content %}
+<div class="section auth-section subheader bg-cover">
+    <div class="container section">
+        <h2>Write Your Profile Here :</h2>
+        <form method="Post">
+            {% csrf_token %}
+            
+            
+        <button type="submit" class="btn btn-success btn_sm">Create</button>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

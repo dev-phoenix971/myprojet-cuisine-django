@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% translate "Recettes" %}{% endblock %}
+
+{% block content %}
+{% comment %} <div class="subheader bg-cover dark-overlay dark-overlay-2" style="background-image: url('{{ recettes.coverImage.url }}')">
+  <div class="container">
+    <div class="subheader-inner">
+      <h1>{{ recette.name }}</h1>
+    </div>
+  </div>
+</div> {% endcomment %}
+<div class="subheader bg-cover dark-overlay dark-overlay-2" style="background-image: url('{{ catrecette.coverImageCat.url }}')">
+  <div class="container">
+    <div class="subheader-inner">
+      <h1>Recipe Archive</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">Recipes</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Recipe Archive</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            {% for recette in recettes %}
+          <div class="recipe recipe-list">
+            
+            <div class="recipe-thumbnail">
+                <img src="{{ recette.image.url }}" alt="recette">
+            </div>
+            <div class="recipe-body">
+              <h5 class="recipe-title"> <a href="{% url 'recettes:recettesdetail' recette.slug %}">{{ recette.name }}</a> </h5>
+              <p class="recipe-text">{{ recette.description }}</p>
+            </div>
+            
+          </div>
+          {% endfor %}  
+        </div>
+
+        <div class="col-lg-4">
+            <div class="sidebar">
+  
+              <div class="sidebar-widget">
+                <h5>{% translate "Recent Recipes" %}</h5>
+                {% for x in recent_recettes %}
+                <article class="media">
+                  <a href="{% url 'recettes:recettesdetail' x.slug %}"><img src="{{ x.image.url }}" width="256" heigh="140" alt="post"></a>
+                  <div class="media-body">
+                    <h6> <a href="{% url 'recettes:recettesdetail' x.slug %}">{{ x.name }}</a> </h6>
+                    <p>{{ x.last_udated }}</p>
+                  </div>
+                </article>
+                {% endfor %}
+
+              </div>
+  
+              <div class="sidebar-widget">
+                <h5>Featured Recipes</h5>
+  
+                <div class="recipe featured-recipe">
+                  <div class="recipe-thumbnail">
+                    <a href="recipe-details.html">
+                      <img src="https://via.placeholder.com/1280x700" alt="blog post">
+                    </a>
+                  </div>
+                  <div class="recipe-body">
+                    <h6 class="recipe-title"> <a href="recipe-details.html">Sugary Pancakes Dressed With Cream and Raspberries</a> </h6>
+                    <div class="recipe-meta">
+                      <div class="recipe-difficulty">
+                        <div class="recipe-difficulty-inner">
+                          <span class="active"></span>
+                          <span class="active"></span>
+                          <span></span>
+                        </div>
+                        <span>Home Cook</span>
+                      </div>
+                      <div class="recipe-steps">
+                        <span><i class="fas fa-concierge-bell"></i> 24 Steps</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="recipe featured-recipe">
+                  <div class="recipe-thumbnail">
+                    <a href="recipe-details.html">
+                      <img src="https://via.placeholder.com/1280x700" alt="blog post">
+                    </a>
+                  </div>
+                  <div class="recipe-body">
+                    <h6 class="recipe-title"> <a href="recipe-details.html">Fig and Raspberry Cake With Sugar Filling and Coating</a> </h6>
+                    <div class="recipe-meta">
+                      <div class="recipe-difficulty">
+                        <div class="recipe-difficulty-inner">
+                          <span class="active"></span>
+                          <span></span>
+                          <span></span>
+                        </div>
+                        <span>Amateur</span>
+                      </div>
+                      <div class="recipe-steps">
+                        <span><i class="fas fa-concierge-bell"></i> 13 Steps</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+  
+            </div>
+          </div>    
+    </div> 
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

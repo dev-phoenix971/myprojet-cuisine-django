@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_utils %}
+{% block title %} {{ title }} {% endblock %}
+
+
+
+
+{% block content %}
+{% comment %} <center>
+<div class="sign_up">
+<h3>Register</h3><br>
+<form method="post">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <button type="submit" style="width:100%" class="btn btn-info btn-sm">Signup</button>
+
+</form>
+</div>
+
+
+<div class="login">
+    <p>Have an Account? <a href="{% url 'accounts:login' %}">Login</a></p>
+
+</div>
+
+
+</center> {% endcomment %}
+
+
+<section class="section auth-section">
+    <div class="container">
+      <form class="auth-form light-bg" method="post" style="background-image: url('https://via.placeholder.com/600x500')">
+        <h1>Sign Up</h1>
+        {{ form|crispy }}
+        {% csrf_token %}
+        <div class="auth-controls form-group">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="rememberMe">
+            <label class="custom-control-label fw-400" for="rememberMe">Agree to our <a href="#" class="btn-link">terms & conditions</a> </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" style="width:100%" class="btn-custom primary btn-block">Sign Up</button>
+        </div>
+        <p class="form-group text-center">Already have an account? <a href="{% url 'accounts:login' %}" class="btn-link">Login</a> </p>
+      </form>
+    </div>
+  </section>
+
+{% endblock %}

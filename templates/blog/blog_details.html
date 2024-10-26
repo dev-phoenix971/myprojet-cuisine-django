@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_utils %}
+{% load crispy_forms_field %}
+
+
+{% block title %}{% translate "blog.blog_title" %}{% endblock %}
+
+{% comment %} {% block css_block %}
+<style>
+
+    .post-detail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+      
+    .post-detail > h1 {
+          text-transform: uppercase;
+          margin-bottom: 1rem;
+    }
+
+</style>
+{% endblock %} {% endcomment %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+<div class="row">
+    <div class="col-sm-6">
+        <h2>{{ blog.blog_title }}</h2>
+        <h4>Posted By : {{ blog.author }}</h4>
+        <i><h6>Published On: {{ blog.publish_date }}</h6></i>
+        <i><h6>Updated On: {{ blog.update_date }}</h6></i>
+        <h6>{{ blog.liked_blog.count }} Likes | {{ blog.blog_blogcomment.count }} Comments</h6>
+
+    </div>
+
+    <div class="col-sm-6">
+        <img src="{{ blog.blog_image.url }}">
+    </div>
+    {{ blog.blog_content|safe|linebreaks }}
+</div>
+
+<hr>
+{% if not liked %}
+<a href="{% url 'blog:liked_post' pk=blog.pk %}"><i class="fa fa-thumbs-up fa-2x"></i></a>
+{% else %}
+<a href="{% url 'blog:unliked_post' pk=blog.pk %}"><i class="fa fa-thumbs-down fa-2x"></i></a>
+{% endif %}
+
+    {% comment %} <article class="post-detail">
+        <h1>{{ blog.blog_title }}</h2>
+        <div><img src="{{ blog.blog_image.url }}" width="300px" height="300px"></div>
+        <p>{{ blog.blog_content|safe }}</p>
+    </article> {% endcomment %}
+
+
+    <div class="row">
+         
+        <div class="col-sm-6">
+            <h5>Comments:</h5>
+            {% for comment in blog.blog_blogcomment.all %}
+            <p><a href"#">{{ comment.author }}</a></p>
+            <b>{{ comment.comment }}</b><br>
+            <h6><i>{{ comment.createdAt }}</i></h6>
+            {% empty %}
+            <h4><i>{% translate "Il y a pas de commentaire pour le moment" %}</i></h4>
+            {% endfor %}
+        </div>
+         
+        <div class="col-sm-6">
+            {% if user.is_authenticated %}
+            <form method="post">
+                {{ comment_form|crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+            </form>
+        
+        {% else %}<br>
+            <h4><i>{% translate "Vous devez vous connecter pour laisser un commentaire" %}</i></h4>
+            {% endif %}
+        </div>
+    </div>
+    <br><br><br>
+</div>
+</section>
+
+{% endblock %}

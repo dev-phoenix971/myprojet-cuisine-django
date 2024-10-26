@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{% translate "Contact us" %}{% endblock %}
+{% block css_block %}
+<style>
+
+label{
+  display: block;
+}
+
+input, textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+</style>
+{% endblock %}   
+{% block content %}
+<div class="subheader bg-cover dark-overlay dark-overlay-2 " style="background-image: url('{% static 'img/background_profil2.jpg' %}')">
+    <div class="container">
+      <div class="subheader-inner">
+        <h1>Contact Us</h1>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+</div>
+  <div class="container section">
+    <div class="row justify-content-center">
+      <div class="col-7 mt-4">
+        <h2 class="title">Send me a Message </h2>
+        <p class="subtitle">
+          Send me a message about anything, let it be about cooking or a get away for a cup of coffee.
+        </p>
+        
+        <form method="post">
+       
+            {% csrf_token %}
+            {{ form.as_p }}
+
+          <button type="submit" class="btn-custom primary" name="button">Submit</button>
+        </form>
+  </div>
+</div>
+</div>
+
+{% endblock %}
